@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter_new/Acount_user.dart';
-
+import 'package:my_flutter_new/hode.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -239,7 +239,9 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Container(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, 'hode');
+          },
           child: Text(
             "Login",
             style: TextStyle(

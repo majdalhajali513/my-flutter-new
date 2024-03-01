@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_new/Acount_user.dart';
+import 'package:my_flutter_new/hode.dart';
 
 import 'loginscreen.dart';
 
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
      initialRoute: 'home',
       routes: {'home':(context) => LoginScreen(),
-      'acount':(context) => Acount()
+      'acount':(context) => Acount(),
+      'hode':(context)  => Home(),
+
       },
     );
   }

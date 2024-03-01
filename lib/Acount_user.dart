@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter_new/hode.dart';
 
 class Acount extends StatefulWidget {
   @override
@@ -83,6 +84,7 @@ class _Acountloog extends State<Acount> {
                             letterSpacing: 2.0,
                             fontSize: 15.0),
                       ),
+
                       SizedBox(height: 25.0,),
                       //last name
                       TextField(
@@ -186,7 +188,7 @@ SizedBox(height: 25.0,),
                       ),
 
                       SizedBox(height: 50.0,),
-                      buildLoginButton(),
+                      buildLoginButton(context),
                     ],
                     ),
                   ),
@@ -196,14 +198,20 @@ SizedBox(height: 25.0,),
           ]))),
     );
   }
+
+
 }
-Widget buildLoginButton() {
+Widget buildLoginButton(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 25),
     child: Container(
       width: double.infinity,
+
       child: ElevatedButton(
-        onPressed: () { },
+        onPressed: () {
+
+     Navigator.pushNamed(context, 'hode');
+        },
         child: Text(
           "Login",
           style: TextStyle(
