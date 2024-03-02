@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter_new/hode.dart';
 
-class Acount extends StatefulWidget {
+class AcountDrive extends StatefulWidget {
   @override
-  _Acountloog createState() => _Acountloog();
+  _AcountloogD createState() => _AcountloogD();
 }
 
-class _Acountloog extends State<Acount> {
+class _AcountloogD extends State<AcountDrive> {
   var val = "hello";
   final formkey = GlobalKey<FormState>();
   final passcontrooler = TextEditingController();
+  final Typecontrooler = TextEditingController();
   final confpasscontrooler = TextEditingController();
   final namecontrooler = TextEditingController();
   final lastnamecontrooler = TextEditingController();
   final emailcontrooler = TextEditingController();
+
   bool sec = true;
   var visable = Icon(
     Icons.visibility,
@@ -26,6 +28,12 @@ class _Acountloog extends State<Acount> {
     color: Color(0xff4c5166),
   );
   TextEditingController textcontroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  String _name = '';
+  int _age = 0;
+  String _email = '';
+  String _vehicleType = '';
+  double _maxWeight = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +56,13 @@ class _Acountloog extends State<Acount> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color(0xffE0F2F1),
-                        Color(0xffB2DFDB),
-                        Color(0xff80CBC4),
-                        Color(0xff4DB6AC),
-                        Color(0xff26A69A),
-                        Color(0xff009688),
-                        Color(0xff00897B),
+                        Color(0xffE3F2FD),
+                        Color(0xffBBDEFB),
+                        Color(0xff90CAF9),
+                        Color(0xff64B5F6),
+                        Color(0xff42A5F5),
+                        Color(0xff2196F3),
+                        Color(0xff1E88E5),
                       ],
                     ),
                   ),
@@ -70,20 +78,20 @@ class _Acountloog extends State<Acount> {
                             ),
                             //name
                             TextFormField(
-                              controller: namecontrooler,
+                              cursorColor: Colors.black,
+                              controller: lastnamecontrooler,
                               validator: (data) {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
                               },
-                              cursorColor: Colors.black,
                               textAlign: TextAlign.right,
                               autocorrect: false,
                               autofocus: true,
                               onChanged: (value) {},
                               keyboardType: TextInputType.name,
                               onEditingComplete: () {},
-                              maxLength: 15,
+                              maxLength: 20,
                               maxLines: null,
                               decoration: InputDecoration(
                                   filled: true,
@@ -100,9 +108,7 @@ class _Acountloog extends State<Acount> {
                                   letterSpacing: 2.0,
                                   fontSize: 15.0),
                             ),
-
-                            SizedBox(height: 25.0,),
-                            //last name
+                            SizedBox(height: 20.0,),
                             TextFormField(
                               cursorColor: Colors.black,
                               controller: lastnamecontrooler,
@@ -134,8 +140,7 @@ class _Acountloog extends State<Acount> {
                                   letterSpacing: 2.0,
                                   fontSize: 15.0),
                             ),
-                            SizedBox(height: 25.0),
-                            //Email
+                            SizedBox(height: 20.0,),
                             TextFormField(
                               autocorrect: false,
                               controller: emailcontrooler,
@@ -143,13 +148,14 @@ class _Acountloog extends State<Acount> {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
-    bool emailValid =
-    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(data);
-    if(!emailValid) {
-      return 'Enter valid Email';
-    }
-    },
+                                bool emailValid =
+                                RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(data);
+                                if (!emailValid) {
+                                  return 'Enter valid Email';
+                                }
+                              },
                               keyboardType: TextInputType.emailAddress,
                               style: TextStyle(color: Colors.black),
                               cursorColor: Colors.black,
@@ -166,16 +172,15 @@ class _Acountloog extends State<Acount> {
                                           25.0))),
 
                             ),
-                            SizedBox(height: 25.0,),
-                            //password
+                            SizedBox(height: 20.0,),
                             TextFormField(
                               controller: passcontrooler,
                               validator: (data) {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
-                                else if(passcontrooler.text.length<10){
-                                  return'password length should be more than 12 characters';
+                                else if (passcontrooler.text.length < 10) {
+                                  return 'password length should be more than 12 characters';
                                 }
                               },
                               autocorrect: false,
@@ -203,15 +208,15 @@ class _Acountloog extends State<Acount> {
                                   borderRadius: BorderRadius.circular(25.0),),),
 
                             ),
-                            SizedBox(height: 25.0),
+                            SizedBox(height: 20.0,),
                             TextFormField(
                               controller: confpasscontrooler,
                               validator: (data) {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
-                                else if(confpasscontrooler.text.length<10){
-                                  return'password length should be more than 12 characters';
+                                else if (confpasscontrooler.text.length < 10) {
+                                  return 'password length should be more than 12 characters';
                                 }
                               },
                               autocorrect: false,
@@ -239,9 +244,41 @@ class _Acountloog extends State<Acount> {
                                   borderRadius: BorderRadius.circular(25.0),),),
 
                             ),
-
+                            SizedBox(height: 20.0,),
+                            TextFormField(
+                              cursorColor: Colors.black,
+                              controller: Typecontrooler,
+                              validator: (data) {
+                                if (data!.isEmpty) {
+                                  return 'This field is required';
+                                }
+                              },
+                              textAlign: TextAlign.right,
+                              autocorrect: false,
+                              autofocus: true,
+                              onChanged: (value) {},
+                              keyboardType: TextInputType.name,
+                              onEditingComplete: () {},
+                              maxLength: 20,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  suffixStyle: TextStyle(
+                                    fontSize: 15.0,
+                                  ),
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintText: "Type Car",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          25.0))),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  letterSpacing: 2.0,
+                                  fontSize: 15.0),
+                            ),
                             SizedBox(height: 50.0,),
                             buildLoginButton(context),
+
                           ],
                           ),
                         ),
@@ -252,41 +289,38 @@ class _Acountloog extends State<Acount> {
               ]))),
     );
   }
+    Widget buildLoginButton(BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 25),
+        child: Container(
+          width: double.infinity,
 
-
-  Widget buildLoginButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Container(
-        width: double.infinity,
-
-        child: ElevatedButton(
-          onPressed: () {
-            if (formkey.currentState!.validate()) {
-              Navigator.pushNamed(context, 'hode');
-              print('${namecontrooler.text}');
-              print('${lastnamecontrooler.text}');
-              print('${emailcontrooler.text}');
-              print('${passcontrooler.text}');
-              print('${confpasscontrooler.text}');
-              namecontrooler.clear();
-              lastnamecontrooler.clear();
-              emailcontrooler.clear();
-              passcontrooler.clear();
-              confpasscontrooler.clear();
-
-
-            }
-
-
-          },
-          child: Text(
-            "Login",
-            style: TextStyle(
-                fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),
+          child: ElevatedButton(
+            onPressed: () {
+              if (formkey.currentState!.validate()) {
+                Navigator.pushNamed(context, 'hode');
+                print('${namecontrooler.text}');
+                print('${lastnamecontrooler.text}');
+                print('${emailcontrooler.text}');
+                print('${passcontrooler.text}');
+                print('${confpasscontrooler.text}');
+                namecontrooler.clear();
+                lastnamecontrooler.clear();
+                emailcontrooler.clear();
+                passcontrooler.clear();
+                confpasscontrooler.clear();
+                Typecontrooler.clear();
+              }
+            },
+            child: Text(
+              "Login",
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
-}

@@ -9,6 +9,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool rememberpwd = false;
+
+
   bool sec = true;
   var visable = Icon(
     Icons.visibility,
@@ -18,10 +20,26 @@ class _LoginScreenState extends State<LoginScreen> {
     Icons.visibility_off,
     color: Color(0xff4c5166),
   );
+  final  passcontrooler=TextEditingController();
+  final emailcontroller=TextEditingController();
 
+  final formkey=GlobalKey<FormState>();
+  bool passToggle=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar (backgroundColor: Colors.black38,
+      title:    Text(
+        "Singing",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 40,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+        elevation: 0.0,
+        centerTitle: true,
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -48,52 +66,41 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20, left: 20),
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 100,
-                        ),
-                        Text(
-                          "Singing",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
+                    child: Form(
+                      key:formkey ,
+                      child: Column(
+                        children: [
+                        Image.asset('image/Untitled.jpg',height: 200,width: 300,),
+
+                          buildEmail(),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        SizedBox(
-                          height: 100,
-                        ),
-                        buildEmail(),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        buildPassword(),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        SizedBox(height: 50.0,),
-                        buildLoginButton(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            buildRememberassword(),
-                            buildForgetPassword()
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        buildCreatAcountDriv(),
-                        buildCreateAcount(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          "الشروط والاحكام",
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )
-                      ],
+                          buildPassword(),
+
+                          SizedBox(height: 20.0,),
+                          buildLoginButton(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              buildRememberassword(),
+                              buildForgetPassword()
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          buildCreatAcountDriv(),
+                          buildCreateAcount(),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "الشروط والاحكام",
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -129,7 +136,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   offset: Offset(0, 2),
                 )
               ]),
-          child: TextField(
+          child: TextFormField(
+            controller: emailcontroller,
+            validator: (value){
+              if(value!.isEmpty){
+    return 'Enter Email';
+    }
+                bool emailValid =
+                RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(value);
+                if(!emailValid){
+                  return 'Enter valid Email';
+
+
+              }
+            },
+
+
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -170,7 +193,16 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           height: 60,
-          child: TextField(
+          child: TextFormField(
+            controller: passcontrooler,
+            validator: (data){
+              if(data!.isEmpty){
+                return 'This field is required';
+              }
+              else if(passcontrooler.text.length<10){
+                return'password length should be more than 12 characters';
+              }
+            },
             obscureText: sec,
             style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -180,8 +212,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       sec = !sec;
                     });
                   },
+                  
                   icon: sec ? visableoff : visable,
                 ),
+               
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(
@@ -190,6 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 hintText: "pwd",
                 hintStyle: TextStyle(color: Colors.black38)),
+            
           ),
         )
       ],
@@ -240,7 +275,16 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, 'hode');
+            if(formkey.currentState!.validate()){
+              print("Data added Successfully");
+              print('${emailcontroller.text}');
+              print('${passcontrooler.text}');
+              Navigator.pushNamed(context, 'hode');
+              emailcontroller.clear();
+              passcontrooler.clear();
+
+            }
+
           },
           child: Text(
             "Login",
@@ -277,7 +321,7 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: () {
-
+Navigator.pushNamed(context, 'driver');
           },
           child: Text(
             "CreateAccount_Driver",
