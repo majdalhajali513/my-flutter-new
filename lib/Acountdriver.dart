@@ -37,6 +37,10 @@ class _AcountloogD extends State<AcountDrive> {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop= MediaQuery.of(context).size.width>=600;
+    final isMobile= MediaQuery.of(context).size.width < 600;
+
+    double screenHeight= MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black38,
@@ -79,7 +83,7 @@ class _AcountloogD extends State<AcountDrive> {
                             //name
                             TextFormField(
                               cursorColor: Colors.black,
-                              controller: lastnamecontrooler,
+                              controller: namecontrooler,
                               validator: (data) {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
@@ -182,7 +186,9 @@ class _AcountloogD extends State<AcountDrive> {
                                 else if (passcontrooler.text.length < 10) {
                                   return 'password length should be more than 12 characters';
                                 }
+
                               },
+
                               autocorrect: false,
                               obscureText: sec,
                               keyboardType: TextInputType.visiblePassword,
@@ -218,6 +224,9 @@ class _AcountloogD extends State<AcountDrive> {
                                 else if (confpasscontrooler.text.length < 10) {
                                   return 'password length should be more than 12 characters';
                                 }
+                                if(data !=passcontrooler.text)
+                                  return 'Not match';
+
                               },
                               autocorrect: false,
                               obscureText: sec,

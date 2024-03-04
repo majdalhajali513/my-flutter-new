@@ -174,8 +174,8 @@ class _Acountloog extends State<Acount> {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
-                                else if(passcontrooler.text.length<10){
-                                  return'password length should be more than 12 characters';
+                                else if(passcontrooler.text.length<7){
+                                  return'password length should be more than 7 characters';
                                 }
                               },
                               autocorrect: false,
@@ -210,9 +210,12 @@ class _Acountloog extends State<Acount> {
                                 if (data!.isEmpty) {
                                   return 'This field is required';
                                 }
-                                else if(confpasscontrooler.text.length<10){
-                                  return'password length should be more than 12 characters';
+                                else if(confpasscontrooler.text.length<7){
+                                  return'password length should be more than 7 characters';
                                 }
+                                if(data!=passcontrooler.text)
+                                return 'Not match';
+
                               },
                               autocorrect: false,
                               obscureText: sec,

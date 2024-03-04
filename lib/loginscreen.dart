@@ -279,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
               print("Data added Successfully");
               print('${emailcontroller.text}');
               print('${passcontrooler.text}');
-              Navigator.pushNamed(context, 'hode');
+              Navigator.pushReplacementNamed(context, 'hode');
               emailcontroller.clear();
               passcontrooler.clear();
 
